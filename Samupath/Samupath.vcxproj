@@ -106,6 +106,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Users\Master Samuel\Workspace\Samupath\Samupath\glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +143,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Samupath/glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,16 +153,60 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bitmap_image.hpp" />
+    <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="BVHAccelerator.h" />
+    <ClInclude Include="BVHBuildNode.h" />
+    <ClInclude Include="BVHObjectInfo.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="GeometricObject.h" />
+    <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="LinearBVHNode.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MidpointComparer.h" />
+    <ClInclude Include="MultiJitteredSampler.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PerspectivePinhole.h" />
+    <ClInclude Include="RawImage.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RegularSampler.h" />
+    <ClInclude Include="Sampler.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Tracer.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="ViewPlane.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="BVHAccelerator.cpp" />
+    <ClCompile Include="BVHBuildNode.cpp" />
+    <ClCompile Include="BVHObjectInfo.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GeometricObject.cpp" />
+    <ClCompile Include="HitInfo.cpp" />
+    <ClCompile Include="LinearBVHNode.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MidpointComparer.cpp" />
+    <ClCompile Include="MultiJitteredSampler.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PerspectivePinhole.cpp" />
+    <ClCompile Include="RawImage.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RegularSampler.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Samupath.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Tracer.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="ViewPlane.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
