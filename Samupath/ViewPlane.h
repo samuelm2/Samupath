@@ -8,9 +8,10 @@ public:
 	double pixel_size;
 	Sampler* sampler;
 	int num_samples;
+	int path_samples;
 
 	ViewPlane();
-	void set_samples(int s);
+	void set_samples(int aa, int p);
 	ViewPlane(int hres, int vres, double pixel_size);
 	~ViewPlane();
 };

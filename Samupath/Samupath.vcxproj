@@ -161,9 +161,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GeometricObject.h" />
+    <ClInclude Include="HemisphereSampler.h" />
     <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="LambertianMaterial.h" />
     <ClInclude Include="LinearBVHNode.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MetallicMaterial.h" />
     <ClInclude Include="MidpointComparer.h" />
     <ClInclude Include="MultiJitteredSampler.h" />
     <ClInclude Include="pch.h" />
@@ -185,9 +188,12 @@
     <ClCompile Include="BVHObjectInfo.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GeometricObject.cpp" />
+    <ClCompile Include="HemisphereSampler.cpp" />
     <ClCompile Include="HitInfo.cpp" />
+    <ClCompile Include="LambertianMaterial.cpp" />
     <ClCompile Include="LinearBVHNode.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MetallicMaterial.cpp" />
     <ClCompile Include="MidpointComparer.cpp" />
     <ClCompile Include="MultiJitteredSampler.cpp" />
     <ClCompile Include="pch.cpp">

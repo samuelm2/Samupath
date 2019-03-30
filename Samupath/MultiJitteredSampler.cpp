@@ -27,14 +27,17 @@ void MultiJitteredSampler::generate_samples(int num_samples, int num_sets)
 }
 
 void MultiJitteredSampler::shuffle_x() {
+	//std::cout << samples.size() << std::endl;
+	//std::cout << num_samples * num_sets << std::endl;
 	int grid_dim = glm::floor(glm::sqrt((float)num_samples));
 	for (int i = 0; i < num_sets; i++) {
 		for (int row = 0; row < grid_dim; row++) {
 			int new_row = (int)((float)row + glm::linearRand(0., 1.) * (float)(grid_dim - row));
 			for (int col = 0; col < grid_dim; col++) {
-				if (num_samples*i + row * grid_dim + col > num_samples * num_sets || num_samples * i + new_row * grid_dim + col > num_samples * num_sets) {
+				if (num_samples*i + row * grid_dim + col >= num_samples * num_sets || num_samples * i + new_row * grid_dim + col >= num_samples * num_sets) {
 					std::cout << "fuck" << std::endl;
 				}
+				//std::cout << num_samples * i + row * grid_dim + col << ", " << num_samples * i + new_row * grid_dim + col << "\n";
 				std::swap(samples[num_samples*i + row * grid_dim + col].x, samples[num_samples*i + new_row * grid_dim + col].x);
 			}
 		}

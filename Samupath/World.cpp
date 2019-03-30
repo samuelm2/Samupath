@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "World.h"
+#include "LambertianMaterial.h"
+#include "MetallicMaterial.h"
 #include "PerspectivePinhole.h"
 
 //#include "Mesh.h"
@@ -10,10 +12,111 @@
 void World::build()
 {
 
-	view_plane.set_samples(64);
-	this->camera = new PerspectivePinhole(Point3D(-100, 46, 200.), Point3D(0., 46., 0.), Point3D(0., 1., 0.), 200) ;
+	view_plane.set_samples(4, 2000);
+	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 100) ;
 
-	bvh = BVHAccelerator(objects, 1);
+	LambertianMaterial* lightMat = new LambertianMaterial();
+	lightMat->emittance = RGBColor(10,10,10);
+	lightMat->reflectance = zero;
+
+	LambertianMaterial* whiteMat = new LambertianMaterial();
+	whiteMat->emittance = zero;//RGBColor(.1, .1, .1);
+	whiteMat->reflectance = RGBColor(.6, .6, .6);
+
+	LambertianMaterial* redMat = new LambertianMaterial();
+	redMat->emittance = zero;// RGBColor(.1, 0, 0);
+	redMat->reflectance = RGBColor(1, 0, 0);
+
+	LambertianMaterial* greenMat = new LambertianMaterial();
+	greenMat->emittance = zero;// RGBColor(0, 0., 0);
+	greenMat->reflectance = RGBColor(0, .6, 0);
+
+	LambertianMaterial* blueMat = new LambertianMaterial();
+	blueMat->emittance = zero;// RGBColor(0, 0, .1);
+	blueMat->reflectance = RGBColor(0, 0, .6);
+
+	MetallicMaterial* mirrorMat = new MetallicMaterial();
+	mirrorMat->emittance = zero;
+	mirrorMat->reflectance = RGBColor(1, 1, 1);
+
+
+
+	Sphere* mirror = new Sphere(Point3D(-60, 30, -30), 50);
+	mirror->material = mirrorMat;
+	objects.push_back(mirror);
+
+	Sphere* red = new Sphere(Point3D(50, -80, 0), 60);
+	red->material = greenMat;
+	objects.push_back(red);
+
+	
+	Sphere* light = new Sphere(Point3D(0, 100, 0), 30);
+	light->material = lightMat;
+	objects.push_back(light);
+
+	Point3D bfl = Point3D(-150, -150, 200);
+	Point3D bfr = Point3D(150, -150, 200);
+	Point3D bbr = Point3D(150, -150, -100);
+	Point3D bbl = Point3D(-150, -150, -100);
+
+	Point3D tfl = Point3D(-150, 150, 200);
+	Point3D tfr = Point3D(150, 150, 200);
+	Point3D tbr = Point3D(150, 150, -100);
+	Point3D tbl = Point3D(-150, 150, -100);
+	
+	Triangle* floor1 = new Triangle(bfl, bfr, bbr);
+	floor1->material = whiteMat;
+	objects.push_back(floor1);
+
+	Triangle* floor2 = new Triangle(bfl, bbr, bbl);
+	floor2->material = whiteMat;
+	objects.push_back(floor2);
+
+	Triangle* ceil1 = new Triangle(tbr, tfr, tfl);
+	ceil1->material = whiteMat;
+	objects.push_back(ceil1);
+
+	Triangle* ceil2 = new Triangle(tbl, tbr, tfl);
+	ceil2->material = whiteMat;
+	objects.push_back(ceil2);
+
+	Triangle* walll1 = new Triangle(bbl, tbl, tfl);
+	walll1->material = blueMat;
+	objects.push_back(walll1);
+
+	Triangle* walll2 = new Triangle(bbl, tfl, bfl);
+	walll2->material = blueMat;
+	objects.push_back(walll2);
+
+	Triangle* wallr1 = new Triangle(tfr, tbr, bbr);
+	wallr1->material = redMat;
+	objects.push_back(wallr1);
+
+	Triangle* wallr2 = new Triangle(bfr, tfr, bbr);
+	wallr2->material = redMat;
+	objects.push_back(wallr2);
+
+	Triangle* back1 = new Triangle(tbl, bbl, tbr);
+	back1->material = whiteMat;
+	objects.push_back(back1);
+
+	Triangle* back2 = new Triangle(tbr, bbl, bbr);
+	back2->material = whiteMat;
+	objects.push_back(back2);
+
+	Triangle* front1 = new Triangle(tfr, bfl, tfl);
+	front1->material = whiteMat;
+	objects.push_back(front1);
+
+	Triangle*front2 = new Triangle(bfr, bfl, tfr);
+	front2->material = whiteMat;
+	objects.push_back(front2);
+
+	bvh = BVHAccelerator(objects, 2);
+	this->tracer = new Tracer(&bvh);
+
+
+
 
 	//plane = new Plane(Point3D(0., -120., 0.), glm::normalize(Direction(0., 1., 0.)));
 	//plane->is_procedural = true;
@@ -71,6 +174,7 @@ World::World(const RGBColor & color)
 	this->objects = std::vector<GeometricObject*>();
 	this->background_color = RGBColor(color);
 	this->view_plane =  ViewPlane();
+	
 }
 
 World::World() : background_color(0., 0., 0.)
