@@ -2,7 +2,7 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 * text=auto
-
+Samupath/glm/doc/api/* linguist-documentation
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
