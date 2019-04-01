@@ -173,6 +173,7 @@
     <ClInclude Include="PerspectivePinhole.h" />
     <ClInclude Include="RawImage.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RefractiveMaterial.h" />
     <ClInclude Include="RegularSampler.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="Sphere.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="PerspectivePinhole.cpp" />
     <ClCompile Include="RawImage.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RefractiveMaterial.cpp" />
     <ClCompile Include="RegularSampler.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Samupath.cpp" />

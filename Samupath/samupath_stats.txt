@@ -1,0 +1,7 @@
+Num triangles: 15
+Number of rays traced: 32639903784
+Elapsed time: 22138.2
+
+Num triangles: 16
+Number of rays traced: 24062969350
+Elapsed time: 17845.7

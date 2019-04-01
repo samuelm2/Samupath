@@ -26,7 +26,7 @@ void PerspectivePinhole::render_scene(const World* world, RawImage & raw_image)
 				pixel_location.y = world->view_plane.pixel_size * (i - 0.5 * world->view_plane.vres + sample_point.y);
 				r.direction = calculate_ray_direction(pixel_location.x, pixel_location.y);
 				for (int p = 0; p < world->view_plane.path_samples; p++) {
-					pathCurr += world->tracer->trace_ray(r, 5);
+					pathCurr += world->tracer->trace_ray(r, 12);
 				}
 				curr += glm::clamp(pathCurr/ (float)(world->view_plane.path_samples), zero, one);
 			}

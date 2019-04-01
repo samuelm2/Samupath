@@ -18,7 +18,7 @@ public:
 		return poss;
 	};
 
-	Material() {};
+	Material() : emittance(), reflectance() {};
 	Material(RGBColor e, RGBColor r) : emittance(e), reflectance(r) {};
 	~Material();
 };
