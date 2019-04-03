@@ -5,12 +5,17 @@ class World;
 class Camera
 {
 public:
+
+
 	Point3D origin;
 	Point3D lookat;
 	Direction up;
 	double vp_distance;
+	int bounces;
+
 	void calculate_uvw();
-	virtual void render_scene(const World * world, RawImage & raw_image) = 0;
+	virtual void render_scene(const World * world, RawImage & raw_image, int num_threads) = 0;
+
 	Camera(Point3D o, Point3D l, Direction up, double vp_distance);
 	Camera();
 	~Camera();

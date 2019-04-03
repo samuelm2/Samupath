@@ -99,6 +99,12 @@
     <ClInclude Include="RefractiveMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ctpl_stl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

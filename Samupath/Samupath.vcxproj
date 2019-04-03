@@ -160,6 +160,7 @@
     <ClInclude Include="BVHObjectInfo.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="ctpl_stl.h" />
     <ClInclude Include="GeometricObject.h" />
     <ClInclude Include="HemisphereSampler.h" />
     <ClInclude Include="HitInfo.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RefractiveMaterial.h" />
     <ClInclude Include="RegularSampler.h" />
+    <ClInclude Include="RenderParams.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Tracer.h" />

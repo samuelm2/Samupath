@@ -21,7 +21,8 @@ public:
 	Tracer* tracer;
 	BVHAccelerator bvh;
 	void build();
-	void render_scene_perspective(RawImage & r) const;
+	void set_samples(int aa, int path, int bounces);
+	void render_scene_perspective(RawImage & raw_image, int num_threads) const;
 	void add_object(GeometricObject* obj);
 	void set_resolution(int hres, int vres, double pixel_size);
 	HitInfo hit_objects(const Ray &) const;

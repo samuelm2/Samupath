@@ -13,11 +13,11 @@
 void World::build()
 {
 
-	view_plane.set_samples(9 , 1500);
+	
 	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 100) ;
 
 	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(8,8,8);
+	lightMat->emittance = RGBColor(20,20,20);
 	lightMat->reflectance = zero;
 
 	LambertianMaterial* whiteMat = new LambertianMaterial();
@@ -62,9 +62,9 @@ void World::build()
 	green->material = greenMat;
 	objects.push_back(green);
 	
-	Sphere* light = new Sphere(Point3D(5, 100, 0), 40);
-	light->material = lightMat;
-	objects.push_back(light);
+	//Sphere* light = new Sphere(Point3D(5, 100, 0), 40);
+	//light->material = lightMat;
+	//objects.push_back(light);
 
 	Point3D bfl = Point3D(-150, -150, 200);
 	Point3D bfr = Point3D(150, -150, 200);
@@ -75,6 +75,27 @@ void World::build()
 	Point3D tfr = Point3D(150, 150, 200);
 	Point3D tbr = Point3D(150, 150, -100);
 	Point3D tbl = Point3D(-150, 150, -100);
+
+	Point3D lighttfl = Point3D(-50, 144, 50);
+	Point3D lighttfr = Point3D(50, 144, 50);
+	Point3D lighttbl = Point3D(-50, 150, -50);
+	Point3D lighttbr = Point3D(50, 150, -50);
+
+	Triangle* light1 = new Triangle(lighttfl, lighttbl, lighttbr);
+	light1->material = lightMat;
+	objects.push_back(light1);
+
+	Triangle* light2 = new Triangle(lighttfr, lighttfl, lighttbr);
+	light2->material = lightMat;
+	objects.push_back(light2);
+
+	Triangle* light3 = new Triangle(lighttbr, lighttbl,lighttfl);
+	light3->material = lightMat;
+	objects.push_back(light3);
+
+	Triangle* light4 = new Triangle(lighttbr, lighttfl, lighttfr);
+	light4->material = lightMat;
+	objects.push_back(light4);
 	
 	Triangle* floor1 = new Triangle(bfl, bfr, bbr);
 	floor1->material = whiteMat;
@@ -135,10 +156,15 @@ void World::build()
 	//plane->color = RGBColor(0., 1., 0.);
 }
 
+void World::set_samples(int aa, int path, int bounces) {
+	view_plane.set_samples(aa, path);
+	camera->bounces = bounces;
+}
 
-void World::render_scene_perspective(RawImage & raw_image) const
+
+void World::render_scene_perspective(RawImage & raw_image, int num_threads) const
 {
-	camera->render_scene(this, raw_image);
+	camera->render_scene(this, raw_image, num_threads);
 }
 
 void World::add_object(GeometricObject * obj)
