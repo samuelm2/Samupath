@@ -167,6 +167,7 @@
     <ClInclude Include="LambertianMaterial.h" />
     <ClInclude Include="LinearBVHNode.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MetallicMaterial.h" />
     <ClInclude Include="MidpointComparer.h" />
     <ClInclude Include="MultiJitteredSampler.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="RenderParams.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Tracer.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="ViewPlane.h" />
@@ -196,6 +198,7 @@
     <ClCompile Include="LambertianMaterial.cpp" />
     <ClCompile Include="LinearBVHNode.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MetallicMaterial.cpp" />
     <ClCompile Include="MidpointComparer.cpp" />
     <ClCompile Include="MultiJitteredSampler.cpp" />

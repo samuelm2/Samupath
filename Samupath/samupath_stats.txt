@@ -5,3 +5,9 @@ Elapsed time: 22138.2
 Num triangles: 16
 Number of rays traced: 24062969350
 Elapsed time: 17845.7
+
+After multithreading:
+
+Num triangles: 19
+Number of rays traced: 228777235800
+Elapsed time: 24177.2
