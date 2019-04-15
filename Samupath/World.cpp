@@ -13,11 +13,11 @@
 void World::build()
 {
 
-	
-	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 100) ;
+
+	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 100);
 
 	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(20,20,20);
+	lightMat->emittance = RGBColor(20, 20, 20);
 	lightMat->reflectance = zero;
 
 	LambertianMaterial* whiteMat = new LambertianMaterial();
@@ -48,7 +48,7 @@ void World::build()
 	glassMat->emittance = zero;
 	glassMat->reflectance = RGBColor(1, 1, 1);
 
-	Mesh* m = new Mesh("objects/dragon.obj", glassMat, glm::dvec3(0, -80, -20), 75, glm::dvec3(0,1,0), glm::dvec3(140, 140, 140));
+	Mesh* m = new Mesh("objects/dragon.obj", mirrorMat, glm::dvec3(0, -80, -20), 75, glm::dvec3(0, 1, 0), glm::dvec3(140, 140, 140));
 	m->add_to_world(objects);
 
 	//Sphere* mirror = new Sphere(Point3D(-60, 10, -30), 40);
@@ -87,14 +87,14 @@ void World::build()
 	light2->material = lightMat;
 	objects.push_back(light2);
 
-	Triangle* light3 = new Triangle(lighttbr, lighttbl,lighttfl);
+	Triangle* light3 = new Triangle(lighttbr, lighttbl, lighttfl);
 	light3->material = lightMat;
 	objects.push_back(light3);
 
 	Triangle* light4 = new Triangle(lighttbr, lighttfl, lighttfr);
 	light4->material = lightMat;
 	objects.push_back(light4);
-	
+
 	Triangle* floor1 = new Triangle(bfl, bfr, bbr);
 	floor1->material = whiteMat;
 	objects.push_back(floor1);

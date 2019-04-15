@@ -4,8 +4,6 @@
 #include <sstream>
 #include <vector>
 
-#define NUM_BOUNCES 12
-
 long long render_chunk(int id, const RenderParams p) {
 	std::stringstream msg;
 	msg << "Thread " << id << " starting chunk " << p.vstart << ", " << p.hstart << "\n";
@@ -73,6 +71,18 @@ void PerspectivePinhole::run_render_threads(const World* world, RawImage & raw_i
 			std::future<long long> result = p.push(render_chunk, r);
 			//results.push_back(result);
 		}
+	}
+	bool quit = false;
+	while (!quit) {
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			/* handle your event here */
+
+		   //User requests quit
+			if (event.type == SDL_QUIT)
+				quit = true;
+		}
+		/* do some other stuff here -- draw your app, etc. */
 	}
 	p.stop(true);
 	//long long num_rays = 0;
