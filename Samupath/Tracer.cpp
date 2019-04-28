@@ -16,9 +16,10 @@ RGBColor Tracer::trace_ray(const Ray & r, int currentDepth)
 	Ray new_ray = Ray(r);
 	new_ray.direction = new_dir;
 	if (bvh->hit(new_ray, min_t, h)) {
+
 		Material* m = h.material;
-		RGBColor emittance = m->emittance;
-		RGBColor reflectance = m->reflectance;
+		RGBColor emittance = m->get_emittance(h);
+		RGBColor reflectance = m->get_reflectance(h);
 
 		if (glm::length2(reflectance) < 0.03) {
 			return emittance;

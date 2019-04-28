@@ -3,8 +3,10 @@
 #include "LambertianMaterial.h"
 #include "MetallicMaterial.h"
 #include "RefractiveMaterial.h"
+#include "SimpleUVMaterial.h"
 #include "PerspectivePinhole.h"
 #include "Mesh.h"
+#include "MeshTriangle.h"
 
 //#include "MeshInstance.h"
 //#include "AreaLight.h"
@@ -16,134 +18,25 @@ void World::build()
 
 	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 100);
 
-	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(20, 20, 20);
-	lightMat->reflectance = zero;
 
-	LambertianMaterial* whiteMat = new LambertianMaterial();
-	whiteMat->emittance = zero;//RGBColor(.1, .1, .1);
-	whiteMat->reflectance = RGBColor(.6, .6, .6);
+	SimpleUVMaterial* redMat = new SimpleUVMaterial();
+	redMat->u_color = RGBColor(1, 0, 0);
+	redMat->v_color = RGBColor(0, 0, 1);
 
-	LambertianMaterial* redMat = new LambertianMaterial();
-	redMat->emittance = zero;// RGBColor(.1, 0, 0);
-	redMat->reflectance = RGBColor(.6, 0, 0);
+	Point3D p1 = Point3D(0, 0, 0);
+	Point3D p2 = Point3D(100, 0, 0);
+	Point3D p3 = Point3D(0, 100, 0);
 
-	LambertianMaterial* greenMat = new LambertianMaterial();
-	greenMat->emittance = zero;// RGBColor(0, 0., 0);
-	greenMat->reflectance = RGBColor(.2, .8, .2);
+	MeshTriangle * mt = new MeshTriangle(p1, p2, p3);
+	mt->p1uv = Point2D(.5, .5);
+	mt->p2uv = Point2D(1, 0);
+	mt->p3uv = Point2D(0, 1);
 
-	LambertianMaterial* blueMat = new LambertianMaterial();
-	blueMat->emittance = zero;// RGBColor(0, 0, .1);
-	blueMat->reflectance = RGBColor(0, 0, .6);
+	mt->material = redMat;
 
-	LambertianMaterial* purpleMat = new LambertianMaterial();
-	purpleMat->emittance = zero;//RGBColor(.1, .1, .1);
-	purpleMat->reflectance = RGBColor(.6, 0, .6);
+	objects.push_back(mt);
 
-	MetallicMaterial* mirrorMat = new MetallicMaterial();
-	mirrorMat->emittance = zero;
-	mirrorMat->reflectance = RGBColor(1, 1, 1);
-
-	RefractiveMaterial* glassMat = new RefractiveMaterial(1.5);
-	glassMat->emittance = zero;
-	glassMat->reflectance = RGBColor(1, 1, 1);
-
-	Mesh* m = new Mesh("objects/dragon.obj", mirrorMat, glm::dvec3(0, -80, -20), 75, glm::dvec3(0, 1, 0), glm::dvec3(140, 140, 140));
-	m->add_to_world(objects);
-
-	//Sphere* mirror = new Sphere(Point3D(-60, 10, -30), 40);
-	//mirror->material = mirrorMat;
-	//objects.push_back(mirror);
-
-	//Sphere* glass = new Sphere(Point3D(0, -60, 20), 40);
-	//glass->material = glassMat;
-	//objects.push_back(glass);
-
-	//Sphere* green = new Sphere(Point3D(50, -80, -50), 40);
-	//green->material = greenMat;
-	//objects.push_back(green);
-
-
-	Point3D bfl = Point3D(-150, -150, 200);
-	Point3D bfr = Point3D(150, -150, 200);
-	Point3D bbr = Point3D(150, -150, -100);
-	Point3D bbl = Point3D(-150, -150, -100);
-
-	Point3D tfl = Point3D(-150, 150, 200);
-	Point3D tfr = Point3D(150, 150, 200);
-	Point3D tbr = Point3D(150, 150, -100);
-	Point3D tbl = Point3D(-150, 150, -100);
-
-	Point3D lighttfl = Point3D(-50, 144, 50);
-	Point3D lighttfr = Point3D(50, 144, 50);
-	Point3D lighttbl = Point3D(-50, 150, -50);
-	Point3D lighttbr = Point3D(50, 150, -50);
-
-	Triangle* light1 = new Triangle(lighttfl, lighttbl, lighttbr);
-	light1->material = lightMat;
-	objects.push_back(light1);
-
-	Triangle* light2 = new Triangle(lighttfr, lighttfl, lighttbr);
-	light2->material = lightMat;
-	objects.push_back(light2);
-
-	Triangle* light3 = new Triangle(lighttbr, lighttbl, lighttfl);
-	light3->material = lightMat;
-	objects.push_back(light3);
-
-	Triangle* light4 = new Triangle(lighttbr, lighttfl, lighttfr);
-	light4->material = lightMat;
-	objects.push_back(light4);
-
-	Triangle* floor1 = new Triangle(bfl, bfr, bbr);
-	floor1->material = whiteMat;
-	objects.push_back(floor1);
-
-	Triangle* floor2 = new Triangle(bfl, bbr, bbl);
-	floor2->material = whiteMat;
-	objects.push_back(floor2);
-
-	Triangle* ceil1 = new Triangle(tbr, tfr, tfl);
-	ceil1->material = purpleMat;
-	objects.push_back(ceil1);
-
-	Triangle* ceil2 = new Triangle(tbl, tbr, tfl);
-	ceil2->material = purpleMat;
-	objects.push_back(ceil2);
-
-	Triangle* walll1 = new Triangle(bbl, tbl, tfl);
-	walll1->material = blueMat;
-	objects.push_back(walll1);
-
-	Triangle* walll2 = new Triangle(bbl, tfl, bfl);
-	walll2->material = blueMat;
-	objects.push_back(walll2);
-
-	Triangle* wallr1 = new Triangle(tfr, tbr, bbr);
-	wallr1->material = redMat;
-	objects.push_back(wallr1);
-
-	Triangle* wallr2 = new Triangle(bfr, tfr, bbr);
-	wallr2->material = redMat;
-	objects.push_back(wallr2);
-
-	Triangle* back1 = new Triangle(tbl, bbl, tbr);
-	back1->material = whiteMat;
-	objects.push_back(back1);
-
-	Triangle* back2 = new Triangle(tbr, bbl, bbr);
-	back2->material = whiteMat;
-	objects.push_back(back2);
-
-	Triangle* front1 = new Triangle(tfr, bfl, tfl);
-	front1->material = whiteMat;
-	objects.push_back(front1);
-
-	Triangle*front2 = new Triangle(bfr, bfl, tfr);
-	front2->material = whiteMat;
-	objects.push_back(front2);
-
-	bvh = BVHAccelerator(objects, 2);
+	bvh = BVHAccelerator(objects, 1);
 	this->tracer = new Tracer(&bvh);
 
 

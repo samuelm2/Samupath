@@ -1,10 +1,9 @@
 #include "pch.h"
-#include "Triangle.h"
-#include <algorithm>
+#include "MeshTriangle.h"
 
 
-
-bool Triangle::hit(const Ray &r, double & min_t, HitInfo & hit_info) const {
+bool MeshTriangle::hit(const Ray & r, double & min_t, HitInfo & hit_info) const
+{
 	double a = p1.x - p2.x;
 	double b = p1.x - p3.x;
 	double c = r.direction.x;
@@ -39,7 +38,9 @@ bool Triangle::hit(const Ray &r, double & min_t, HitInfo & hit_info) const {
 	if (t < TINY_DOUBLE) {
 		return false;
 	}
-	 
+
+	hit_info.uv = (1 - gamma - beta) * p1uv + gamma * p3uv + beta*p2uv;
+
 	hit_info.material = this->material;
 	hit_info.normal = this->normal;
 	hit_info.did_hit = true;
@@ -47,7 +48,7 @@ bool Triangle::hit(const Ray &r, double & min_t, HitInfo & hit_info) const {
 	return true;
 }
 
-BoundingBox Triangle::getBBox() const
+BoundingBox MeshTriangle::getBBox() const
 {
 	double minx = std::min(p1.x, std::min(p2.x, p3.x));
 	double miny = std::min(p1.y, std::min(p2.y, p3.y));
@@ -61,14 +62,14 @@ BoundingBox Triangle::getBBox() const
 	return BoundingBox(Point3D(minx, miny, minz), Point3D(maxx, maxy, maxz));
 }
 
-Triangle::Triangle(const Point3D & a, const Point3D & b, const Point3D & c) : p1(a), p2(b), p3(c)
+MeshTriangle::MeshTriangle(const Point3D & a, const Point3D & b, const Point3D & c) : p1(a), p2(b), p3(c)
 {
 	Direction ab = b - a;
 	Direction ac = c - a;
 	this->normal = glm::normalize(glm::cross(ab, ac));
 }
 
-Triangle::Triangle()
+MeshTriangle::MeshTriangle()
 {
 	this->p1 = Point3D(0., 0., 0.);
 	this->p2 = Point3D(0., 0., 0.);
@@ -77,6 +78,6 @@ Triangle::Triangle()
 }
 
 
-Triangle::~Triangle()
+MeshTriangle::~MeshTriangle()
 {
 }

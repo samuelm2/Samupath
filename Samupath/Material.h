@@ -2,11 +2,21 @@
 #include "Constants.h"
 #include "Ray.h"
 #include "glm/gtc/random.hpp"
+class HitInfo;
+#include "HitInfo.h"
 class Material
 {
 public:
 	RGBColor emittance;
 	RGBColor reflectance;
+
+	virtual RGBColor get_reflectance(const HitInfo & hit) {
+		return reflectance;
+	}
+
+	virtual RGBColor get_emittance(const HitInfo & hit) {
+		return emittance;
+	}
 
 	virtual Direction BRDF(const Ray & ray, const Direction & normal) = 0;
 
