@@ -19,7 +19,7 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(std::string file_path, Material* material, const Direction & translation, float rotationDegrees, const Direction & rotationDirection, const Direction & scale)
+Mesh::Mesh(std::string file_path, Material* material, const Direction & translation, float rotationDegrees, const Direction & rotationDirection, const Direction & scale, bool texture=false)
 {
 	//auto t = glm::mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 	glm::dmat4 trans_mat = glm::translate(glm::dmat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1), translation);
@@ -46,12 +46,13 @@ Mesh::Mesh(std::string file_path, Material* material, const Direction & translat
 
 	glm::dvec4 temp[3];
 	Point3D points[3];
+	Point2D uvs[3];
 	for (int i = 0; i < 3; i++) {
 		temp[i] = glm::dvec4(1.);
 		points[i] = Point3D();
 	}
 
-	this->triangles = std::vector<Triangle>();
+	this->triangles = std::vector<MeshTriangle>();
 
 	for (size_t s = 0; s < shapes.size(); s++) {
 		// Loop over faces(polygon)
@@ -71,9 +72,15 @@ Mesh::Mesh(std::string file_path, Material* material, const Direction & translat
 				points[v].x = temp[v].x;
 				points[v].y = temp[v].y;
 				points[v].z = temp[v].z;
+
+				uvs[v].x = attrib.texcoords[2 * idx.texcoord_index];
+				uvs[v].y = attrib.texcoords[2 * idx.texcoord_index + 1];
 			}
 
-			Triangle t = Triangle(points[0], points[1], points[2]);
+			MeshTriangle t = MeshTriangle(points[0], points[1], points[2]);
+			t.p1uv = uvs[0];
+			t.p2uv = uvs[1];
+			t.p3uv = uvs[2];
 			t.material = material;
 
 			triangles.push_back(t);

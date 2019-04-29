@@ -189,6 +189,7 @@
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SimpleUVMaterial.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="TextureMaterial.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="Tracer.h" />
     <ClInclude Include="Triangle.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="Samupath.cpp" />
     <ClCompile Include="SimpleUVMaterial.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="TextureMaterial.cpp" />
     <ClCompile Include="Tracer.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="ViewPlane.cpp" />

@@ -59,17 +59,12 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 	int negative_dir[3] = { inverse_direction.x < 0, inverse_direction.y < 0, inverse_direction.z < 0 };
 	int todo_offset = 0, node_num = 0;
 	int todo[64];
-
-	bool is_reflective = false;
-	bool is_transparent = false;
-	bool is_light = false;
-	bool is_procedural = false;
-	bool is_noise = false;
+	
 	double curr_t = MAX_DOUBLE;
 	double minimum_t = MAX_DOUBLE;
 	Material* curr = nullptr;
 	Direction curr_normal = Direction();
-	Direction curr_normal2 = Direction();
+	Point2D currUV = Point2D();
 	//std::cout << "entering loop" << std::endl;
 	while (true) {
 		const LinearBVHNode *node = &nodes[node_num];
@@ -83,7 +78,7 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 						minimum_t = curr_t;
 						curr = hit_info.material;
 						curr_normal = hit_info.normal;
-
+						currUV = hit_info.uv;
 						hit = true;
 
 					}
@@ -114,6 +109,7 @@ bool BVHAccelerator::hit(const Ray & r, double & min_t, HitInfo & hit_info) cons
 	hit_info.hit_point = r.origin + minimum_t * r.direction;
 	hit_info.material = curr;
 	hit_info.normal = curr_normal;
+	hit_info.uv = currUV;
 	min_t = minimum_t;
 
 

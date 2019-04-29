@@ -3,7 +3,7 @@
 #include <vector>
 #include "Material.h"
 #include "Constants.h"
-#include "Triangle.h"
+#include "MeshTriangle.h"
 
 
 class Mesh
@@ -14,12 +14,11 @@ public:
 	Material* material;
 
 	void add_to_world(std::vector<GeometricObject*> & objs);
-	Mesh(std::string file_path, Material * material, const Direction & translation, float rotationDegrees, const Direction & rotationDirection, const Direction & scale);
+	Mesh(std::string file_path, Material * material, const Direction & translation, float rotationDegrees, const Direction & rotationDirection, const Direction & scale, bool texture);
 
 private:
-	std::vector<Triangle> triangles;
+	std::vector<MeshTriangle> triangles;
 	Mesh();
-	
 	~Mesh();
 };
 
