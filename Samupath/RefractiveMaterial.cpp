@@ -3,7 +3,7 @@
 #include <algorithm>
 
 
-Direction RefractiveMaterial::BRDF(const Ray & ray, const Direction & normal)
+Direction RefractiveMaterial::outgoing(const Ray & ray, const Direction & normal)
 {
 	double kr;
 	fresnel(ray.direction, normal, refractive_index, kr);
@@ -17,6 +17,11 @@ Direction RefractiveMaterial::BRDF(const Ray & ray, const Direction & normal)
 		return glm::reflect(ray.direction, normal);
 	}
 
+}
+
+RGBColor RefractiveMaterial::BRDF(const Ray & incoming, const Ray & outgoing, const Direction & normal, const HitInfo & h)
+{
+	return reflectance;
 }
 
 RefractiveMaterial::~RefractiveMaterial()

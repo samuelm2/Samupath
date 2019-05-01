@@ -5,7 +5,9 @@ class TextureMaterial :
 	public Material
 {
 public:
-	Direction BRDF(const Ray & ray, const Direction & normal);
+	Direction outgoing(const Ray & ray, const Direction & normal);
+	RGBColor BRDF(const Ray & incoming, const Ray & outgoing, const Direction & normal, const HitInfo & h);
+
 	RGBColor get_reflectance(const HitInfo & h) override;
 	bitmap_image* texture;
 	TextureMaterial(std::string filename);

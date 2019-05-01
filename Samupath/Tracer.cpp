@@ -19,19 +19,20 @@ RGBColor Tracer::trace_ray(const Ray & r, int currentDepth)
 
 		Material* m = h.material;
 		RGBColor emittance = m->get_emittance(h);
-		RGBColor reflectance = m->get_reflectance(h);
-
-		if (glm::length2(reflectance) < 0.03) {
-			return emittance;
-		}
 
 		Ray next_ray = Ray();
 		next_ray.origin = h.hit_point;
-		next_ray.direction = m->BRDF(new_ray, h.normal);
+		next_ray.direction = m->outgoing(new_ray, h.normal);
+
+		RGBColor reflected_color = m->BRDF(r, next_ray, h.normal, h);
+
+		if (glm::length2(reflected_color) < 0.03) {
+			return emittance;
+		}
 
 		RGBColor incoming = trace_ray(next_ray, currentDepth - 1);
 
-		return emittance + (reflectance * incoming);
+		return emittance + (reflected_color * incoming * (float)glm::dot(next_ray.direction, h.normal));
 	}
 	return zero;
 }

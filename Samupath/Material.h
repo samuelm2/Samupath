@@ -18,7 +18,9 @@ public:
 		return emittance;
 	}
 
-	virtual Direction BRDF(const Ray & ray, const Direction & normal) = 0;
+	virtual Direction outgoing(const Ray & ray, const Direction & normal) = 0;
+
+	virtual RGBColor BRDF(const Ray & incoming, const Ray & outgoing, const Direction & normal, const HitInfo & h) = 0;
 
 	Point3D get_sample3D(const Direction & normal) {
 		Point3D poss = glm::sphericalRand(1.0f);

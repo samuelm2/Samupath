@@ -20,7 +20,7 @@ void World::build()
 	this->camera = new PerspectivePinhole(Point3D(0, -50, 229.), Point3D(0., -50, 0.), Point3D(0., 1., 0.), 130);
 
 	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(20, 20, 20);
+	lightMat->emittance = RGBColor(30, 30, 30);
 	lightMat->reflectance = zero;
 
 	LambertianMaterial* whiteMat = new LambertianMaterial();
@@ -76,10 +76,10 @@ void World::build()
 	Point3D tbr = Point3D(150, 150, -100);
 	Point3D tbl = Point3D(-150, 150, -100);
 
-	Point3D lighttfl = Point3D(-50, 144, 50);
-	Point3D lighttfr = Point3D(50, 144, 50);
-	Point3D lighttbl = Point3D(-50, 150, -50);
-	Point3D lighttbr = Point3D(50, 150, -50);
+	Point3D lighttfl = Point3D(-50, 149, 100);
+	Point3D lighttfr = Point3D(50, 149, 100);
+	Point3D lighttbl = Point3D(-50, 149, -50);
+	Point3D lighttbr = Point3D(50, 149, -50);
 
 	Triangle* light1 = new Triangle(lighttfl, lighttbl, lighttbr);
 	light1->material = lightMat;
@@ -106,11 +106,11 @@ void World::build()
 	objects.push_back(floor2);
 
 	Triangle* ceil1 = new Triangle(tbr, tfr, tfl);
-	ceil1->material = blueMat;
+	ceil1->material = redMat;
 	objects.push_back(ceil1);
 
 	Triangle* ceil2 = new Triangle(tbl, tbr, tfl);
-	ceil2->material = blueMat;
+	ceil2->material = redMat;
 	objects.push_back(ceil2);
 
 	Triangle* walll1 = new Triangle(bbl, tbl, tfl);
