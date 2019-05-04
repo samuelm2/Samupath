@@ -17,10 +17,10 @@ void World::build()
 {
 
 
-	this->camera = new PerspectivePinhole(Point3D(0, -50, 229.), Point3D(0., -50, 0.), Point3D(0., 1., 0.), 130);
+	this->camera = new PerspectivePinhole(Point3D(0, 50, 229.), Point3D(0., -100, 0.), Point3D(0., 1., 0.), 130);
 
 	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(30, 30, 30);
+	lightMat->emittance = RGBColor(45, 45, 45);
 	lightMat->reflectance = zero;
 
 	LambertianMaterial* whiteMat = new LambertianMaterial();
@@ -37,7 +37,7 @@ void World::build()
 
 	LambertianMaterial* blueMat = new LambertianMaterial();
 	blueMat->emittance = zero;// RGBColor(0, 0, .1);
-	blueMat->reflectance = RGBColor(0, 0, .6);
+	blueMat->reflectance = RGBColor(126./255, 249./255, 1);
 
 	LambertianMaterial* purpleMat = new LambertianMaterial();
 	purpleMat->emittance = zero;//RGBColor(.1, .1, .1);
@@ -145,8 +145,8 @@ void World::build()
 	front2->material = whiteMat;
 	objects.push_back(front2);
 
-	TextureMaterial* t = new TextureMaterial("objects/book.bmp");
-	Mesh* book = new Mesh("objects/book.obj", t, glm::vec3(0, -62, 0), -30, glm::vec3(0, 1, 0), glm::vec3(6, 6, 6), false);
+	TextureMaterial* t = new TextureMaterial("objects/lotus.bmp");
+	Mesh* book = new Mesh("objects/lotus_h.obj", t, glm::vec3(0, -160, 50), 60, glm::vec3(0, 1, 0), glm::vec3(38, 38, 38), false);
 	book->add_to_world(objects);
 
 	bvh = BVHAccelerator(objects, 1);
