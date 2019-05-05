@@ -6,6 +6,7 @@
 #include "SimpleUVMaterial.h"
 #include "TextureMaterial.h"
 #include "PerspectivePinhole.h"
+#include "RoughMetallicMaterial.h"
 #include "Mesh.h"
 #include "MeshTriangle.h"
 
@@ -17,10 +18,10 @@ void World::build()
 {
 
 
-	this->camera = new PerspectivePinhole(Point3D(0, 50, 229.), Point3D(0., -100, 0.), Point3D(0., 1., 0.), 130);
+	this->camera = new PerspectivePinhole(Point3D(0, 0, 199.), Point3D(0., 0, 0.), Point3D(0., 1., 0.), 10);
 
 	LambertianMaterial* lightMat = new LambertianMaterial();
-	lightMat->emittance = RGBColor(45, 45, 45);
+	lightMat->emittance = RGBColor(30, 30, 30);
 	lightMat->reflectance = zero;
 
 	LambertianMaterial* whiteMat = new LambertianMaterial();
@@ -52,9 +53,12 @@ void World::build()
 	glassMat->reflectance = RGBColor(1, 1, 1);
 
 
+	RoughMetallicMaterial* goldMat = new RoughMetallicMaterial();
+	goldMat->reflectance = RGBColor(212./255, 175. / 255., 55./255.);
+	goldMat->roughness = .011;
 
 	//Sphere* mirror = new Sphere(Point3D(-60, 10, -30), 40);
-	//mirror->material = mirrorMat;
+	//mirror->material = goldMat;
 	//objects.push_back(mirror);
 
 	//Sphere* glass = new Sphere(Point3D(0, -60, 20), 40);
@@ -145,8 +149,8 @@ void World::build()
 	front2->material = whiteMat;
 	objects.push_back(front2);
 
-	TextureMaterial* t = new TextureMaterial("objects/lotus.bmp");
-	Mesh* book = new Mesh("objects/lotus_h.obj", t, glm::vec3(0, -160, 50), 60, glm::vec3(0, 1, 0), glm::vec3(38, 38, 38), false);
+	//TextureMaterial* t = new TextureMaterial("objects/lotus.bmp");
+	Mesh* book = new Mesh("objects/dragon.obj", goldMat, glm::vec3(0, -60, 0), 60, glm::vec3(0, 1, 0), glm::vec3(120, 120, 120), false);
 	book->add_to_world(objects);
 
 	bvh = BVHAccelerator(objects, 1);

@@ -186,6 +186,7 @@
     <ClInclude Include="RegularSampler.h" />
     <ClInclude Include="RenderParams.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="RoughMetallicMaterial.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SimpleUVMaterial.h" />
     <ClInclude Include="Sphere.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RefractiveMaterial.cpp" />
     <ClCompile Include="RegularSampler.cpp" />
+    <ClCompile Include="RoughMetallicMaterial.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Samupath.cpp" />
     <ClCompile Include="SimpleUVMaterial.cpp" />

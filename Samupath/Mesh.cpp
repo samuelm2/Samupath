@@ -72,9 +72,10 @@ Mesh::Mesh(std::string file_path, Material* material, const Direction & translat
 				points[v].x = temp[v].x;
 				points[v].y = temp[v].y;
 				points[v].z = temp[v].z;
-
-				uvs[v].x = attrib.texcoords[2 * idx.texcoord_index];
-				uvs[v].y = attrib.texcoords[2 * idx.texcoord_index + 1];
+				if (idx.texcoord_index > 0) {
+					uvs[v].x = attrib.texcoords[2 * idx.texcoord_index];
+					uvs[v].y = attrib.texcoords[2 * idx.texcoord_index + 1];
+				}
 			}
 
 			MeshTriangle t = MeshTriangle(points[0], points[1], points[2]);
