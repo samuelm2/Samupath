@@ -1,0 +1,11 @@
+## SamuPath
+A production quality raytracer
+
+## Example Images
+![glass dragon](Samupath/images/dragon_converged.bmp)
+![flower](Samupath/images/flower.bmp)
+![texture](Samupath/images/texture_brdf_converged.bmp)
+![orb](Samupath/images/converged_multithreaded.bmp)
+![metal](Samupath/images/roughmetal.bmp)
+
+
